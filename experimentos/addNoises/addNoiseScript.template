@@ -1,0 +1,11 @@
+clear; clc
+noiseFile ='noiseDIR/noise_0noiseNumber_0stretchNumber.flac';
+cleanFile='speechFILE';
+
+[s,fs] = audioread(cleanFile);
+[sn, fsn] = audioread(noiseFile);
+
+addpath('/home/enio/Downloads/voicebox')
+[z,p,fso]=v_addnoise(s,fs,SNR,'d',sn,fsn);
+sz = z/max(abs(z));
+audiowrite('OUTPUTFILE',sz,fs)
